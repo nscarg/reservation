@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+          "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   
+ 
+ <bean id="propertyConfigurer" class="nsc.utils.ConfigurablePropertyPlaceholder">
+  <property name="propertyLocationSystemProperty" value="propertyPath" />
+  <property name="defaultPropertyFileName" value="configf.properties" />
+  <property name="ignoreResourceNotFound" value="false"/>
+</bean>
+    
+  <bean id="leerPrinterQueue" class="printers.servicio.LeerPrinterQueue" >
+		<property name="serviciosMail">
+            <ref bean="NSC_AMensaje"/>
+        </property>        
+        <property name="lista">
+      		<ref bean="itemList"/>
+    	</property>
+    	<property name="tabla">
+      		<ref bean="itemTable"/>
+    	</property>
+    	<property name="inicioBoton">
+      		<ref bean="initButton"/>
+    	</property>
+       	<property name="mainFrame">
+      		<ref bean="mainFrame" />
+    	</property>
+     	<property name="auditoriaMail">
+            <ref bean="auditCSV"/>
+        </property>
+        <property name="mailSender">
+            <ref bean="mailSender"/>
+        </property>
+       <property name="mailMessage">
+            <ref bean="mailMessage"/>
+        </property>  
+        <property name="fromConfirma">
+			<value>${fromConfirma}</value>
+		</property>
+		<property name="idenQueue">
+		   <value>us-east-1:1055c550-9cc1-4e96-9016-c615ebbv08a4</value>
+	   </property>   
+        <property name="serverConfirma">
+			<value>${serverConfirma}</value>
+		</property>  
+       <property name="impresion">
+            <ref bean="impresion"/>
+       </property> 
+       <property name="sqsURL">
+		   <value>${sqsURL}</value>
+	   </property> 
+	   </bean> 
+	
+	
+	
+	   
+   
+  <bean id="auditCSV" class="nsc.utils.NSC_AuditCSV">
+		<property name="destino">
+			<value>${destinoAudit}</value>
+		</property>
+  </bean>
+  
+  
+  
+   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  <property name="host" value="${hostsmtp}" />
+	<property name="port" value="${portsmtp}" />
+	<property name="protocol" value="${protocol}" />
+	<property name="username" value="${usernamemail}" />
+	<property name="password" value="${passwdmail}" />
+	<property name="javaMailProperties">
+	<props>
+		<prop key="mail.smtp.auth">true</prop>
+		<prop key="mail.smtp.starttls.enable">true</prop>
+		<prop key="mail.smtp.debug">true</prop>
+	</props>
+	</property>
+ 
+   </bean>
+     
+  <bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from">
+			<value>${from}</value>
+		</property>
+		<property name="subject">
+			<value> HAC - IMAGENES  :  Servicio LEER COLA DE IMPRESION </value>
+		</property>
+  </bean>
+  
+   <bean id="mailMessageGate" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from">
+			<value>${from}</value>
+		</property>
+		<property name="subject">
+			<value> HAC - IMAGENES  :  Servicio GATEWAY IMAGENES </value>
+		</property>
+  </bean> 
+  
+ 
+</beans>

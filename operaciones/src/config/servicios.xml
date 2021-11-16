@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="NSC_AMensaje" class="nsc.utils.NSC_AMensaje">	
+		<property name="protocol">
+      		<value>${protocolp}</value>
+    	</property>
+		<property name="host">
+      		<value>${hostpop}</value>
+    	</property>    	
+		<property name="user">
+      		<value>${usermail}</value>
+    	</property>    	
+		<property name="password">
+      		<value>${pwdmails}</value>
+    	</property>    	
+      	<property name="sdebug">
+      		<value>false</value>
+    	</property>
+    	
+  	</bean>	
+	
+	<bean id="mensajemail" class="nsc.utils.NSC_MensajeMail"/>	
+	
+	
+	<bean id="impresion" class="nsc.utils.Impresion" >
+		<property name="origen">
+      		<value>${origentalon}</value>
+		</property>  
+		<property name="etPrinterip">
+      		<value>${etPrinterip}</value>
+		</property>
+		<property name="etPrinterp">
+      		<value>${etPrinterp}</value>
+		</property>
+		<property name="taPrinterip">
+      		<value>${taPrinterip}</value>
+		</property>
+		<property name="taPrinterp">
+      		<value>${taPrinterp}</value>
+		</property>
+		<property name="compres">
+      		<value>${compres}</value>
+		</property>
+		
+    </bean>
+    
+    
+    <bean id="envioRequest" class="nsc.utils.EnvioRequest" >
+		<property name="origen">
+      		<value>${origen}</value>
+		</property>  
+		<property name="equipoip">
+      		<value>${equipoip}</value>
+		</property>
+		<property name="equipopuerto">
+      		<value>${equipopuerto}</value>
+		</property>
+		<property name="auditoriaMail">
+            <ref bean="auditCSV"/>
+        </property>
+	</bean>
+  
+</beans>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+          "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="mainFrameG" class="nsc.gui.cg.MainFrame" init-method="init">
+    <property name="contentPane">
+      <ref bean="mainPanelG"/>
+    </property>
+    <property name="title">
+      <value></value>
+    </property>
+    
+  </bean>
+
+  <bean id="mainPanelG" class="nsc.gui.cg.BoxLayoutPanel" init-method="init">
+    <property name="axis">
+       <value>1</value>
+    </property>
+    <property name="panelComponents">
+      <list>
+        <ref bean="itemScrollPaneG"/>
+        <ref bean="buttonPanelG"/>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="itemScrollPaneG" class="javax.swing.JScrollPane">
+    <constructor-arg>
+      <ref bean="itemTableG"/>
+    </constructor-arg>
+  </bean>
+
+  <bean id="itemTableG" class="javax.swing.JTable">
+    <property name="model">
+      <ref bean="itemTableModelG"/>
+    </property>
+  </bean>
+
+  <bean id="itemTableModelG" class="nsc.gui.cg.ItemTableModel">
+    <property name="itemList">
+      <ref bean="itemListG"/>
+    </property>
+  </bean>
+  
+  <bean id="itemListG" class="java.util.ArrayList"> </bean>
+  
+  <bean id="buttonPanelG" class="nsc.gui.cg.BoxLayoutPanel" init-method="init">
+    <property name="axis">
+       <value>0</value>
+    </property>
+    <property name="panelComponents">
+      <list>
+        <ref bean="initButtonG"/>
+        <ref bean="stopButtonG"/>
+      </list>
+    </property>
+  </bean>
+  
+  <bean id="stopButtonG" class="nsc.gui.cg.button.ActionListenerButton" init-method="init">
+    <property name="actionListener">
+      <ref bean="stopButtonActionListenerG"/>
+    </property>
+    <property name="text">
+      <value>Finalizar</value>
+    </property>
+  </bean>
+
+  <bean id="initButtonG" class="nsc.gui.cg.button.ActionListenerButton"  init-method="init">
+    <property name="actionListener">
+       <ref bean="initButtonActionListenerG"/>
+    </property>
+    <property name="text">
+      <value>Iniciar</value>
+    </property>
+  </bean>
+  <bean id="stopButtonActionListenerG" class="gateway.listeners.StopButtonActionListener">
+    <property name="list">
+      <ref bean="itemListG"/>
+    </property>
+    <property name="table">
+      <ref bean="itemTableG"/>
+    </property>
+    <property name="servicioGate">
+          <ref bean="gatewayQueue"/>
+    </property>
+   </bean>
+   
+  <bean id="initButtonActionListenerG"   class="gateway.listeners.InitButtonActionListener">
+    <property name="list">
+      <ref bean="itemListG"/>
+    </property>
+    <property name="table">
+      <ref bean="itemTableG"/>
+    </property>
+    <property name="servicioGate">
+          <ref bean="gatewayQueue"/>
+    </property>
+    </bean>
+</beans>
